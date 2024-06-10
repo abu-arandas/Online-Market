@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../controller/language.dart';
+import '../model/text.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -7,48 +10,72 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+class _SplashScreenState extends State<SplashScreen> {
+  bool animated = false;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      duration: const Duration(seconds: 2),
-      vsync: this,
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
-
-    _controller.forward();
-    _controller.repeat();
-
-    /*Future.delayed(
+    if (mounted) {
+      Future.delayed(
         const Duration(seconds: 3),
-        () => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
-              ),
-            ));*/
-  }
+        () => setState(() => animated = true),
+      );
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+      /*Future.delayed(
+        const Duration(seconds: 10),
+        () => Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const Main()),
+          (route) => false,
+        ),
+      );*/
+    }
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: FadeTransition(
-          opacity: _animation,
-          child: Center(
-            child: Image.asset('assets/logo.png'),
+        body: SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  text(
+                    text: TextString(en: 'Online', ar: 'المتجر'),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 48),
+                  ),
+                  const Text(
+                    ' ',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
+                  ),
+                  text(
+                    text: TextString(en: 'Market', ar: 'الالكتروني'),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 48,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 25),
+              AnimatedOpacity(
+                opacity: animated ? 1 : 0,
+                duration: const Duration(seconds: 3),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).textTheme.bodyLarge!.color,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       );
