@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'controller/language.dart';
-import 'view/splash.dart';
+import '/exports.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,12 +9,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         title: 'Online Market',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: ThemeController().themeData(context, Brightness.light),
+        darkTheme: ThemeController().themeData(context, Brightness.dark),
+        themeMode: ThemeController().isDark ? ThemeMode.dark : ThemeMode.light,
         initialBinding: BindingsBuilder(() {
           Get.put<LanguageController>(LanguageController());
+          Get.put<ThemeController>(ThemeController());
+          Get.put<AuthenticationController>(AuthenticationController());
         }),
         home: const SplashScreen(),
       );

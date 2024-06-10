@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../controller/language.dart';
-import '../model/text.dart';
+import '/exports.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,13 +20,13 @@ class _SplashScreenState extends State<SplashScreen> {
         () => setState(() => animated = true),
       );
 
-      /*Future.delayed(
+      Future.delayed(
         const Duration(seconds: 10),
         () => Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const Main()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
           (route) => false,
         ),
-      );*/
+      );
     }
   }
 

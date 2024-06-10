@@ -1,15 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '/model/text.dart';
+import '/exports.dart';
 
 class LanguageController extends GetxController {
+  static LanguageController instance = Get.find();
+
   Locale language = const Locale('en', 'US');
 
-  void changeLanguage() {
-    language = language.languageCode == 'en'
-        ? const Locale('ar', 'JO')
-        : const Locale('en', 'US');
+  void changeLanguage(Locale? value) {
+    language = value ?? const Locale('en', 'US');
 
     update();
   }
@@ -29,3 +26,8 @@ Widget text({
         maxLines: maxLines,
       ),
     );
+
+String textString(TextString text) =>
+    LanguageController.instance.language.languageCode == 'en'
+        ? text.en
+        : text.ar;
