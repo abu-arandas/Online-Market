@@ -1,49 +1,46 @@
 import '/exports.dart';
 
 class UserModel {
-  String id, name, token;
-  String? image;
-  String phone;
-  Roles role;
-  bool available;
-  Map<String, double>? address;
+  String id, name, email, image;
+  String? password;
+  PhoneNumber phone;
+  GeoPoint? address;
   List<PromoCodeModel> promoCodes;
 
   UserModel({
     required this.id,
     required this.name,
-    this.image,
+    required this.email,
+    required this.image,
+    this.password,
     required this.phone,
-    required this.token,
-    required this.role,
-    required this.available,
     this.address,
     required this.promoCodes,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> data) => UserModel(
-        id: data['id'],
+  factory UserModel.fromJson(DocumentSnapshot data) => UserModel(
+        id: data.id,
         name: data['name'],
-        image: data['image'],
-        phone: data['phone'],
-        token: data['token'],
-        role: roles.map[data['role']]!,
-        available: data['available'],
+        phone: PhoneNumber.fromJson(data['phone']),
+        email: data['email'],
+        image: data['image'] ??
+            'https://firebasestorage.googleapis.com/v0/b/alkhatib-market.appspot.com/o/no-profile-picture-icon.webp?alt=media&token=bfac8dae-344d-4cc9-b763-421a5c0d8988',
         address: data['address'],
-        promoCodes: List<PromoCodeModel>.from(
-          data['promoCodes'].map((x) => PromoCodeModel.fromJson(x)),
+        promoCodes: List<PromoCodeModel>.generate(
+          data['promoCodes'].length,
+          (index) => PromoCodeModel.fromJson(data['promoCodes'][index]),
         ),
       );
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'image': image,
+        'phone': phone.toJson(),
+        'email': email,
+        'address': address,
+        'promoCodes': promoCodes.map((x) => x.toJson()).toList(),
+      };
 }
-
-enum Roles { admin, employee, driver, client }
-
-EnumValues<Roles> roles = EnumValues({
-  'Admin': Roles.admin,
-  'Driver': Roles.driver,
-  'Employee': Roles.employee,
-  'Client': Roles.client,
-});
 
 class PromoCodeModel {
   final String id;

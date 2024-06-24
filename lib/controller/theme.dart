@@ -27,8 +27,9 @@ class ThemeController extends GetxController {
           seedColor: const Color(0xFF540804),
           brightness: brightness,
         ),
-        progressIndicatorTheme:
-            const ProgressIndicatorThemeData(color: Color(0xFF540804)),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Color(0xFF540804),
+        ),
         appBarTheme: AppBarTheme(
           toolbarHeight: 100,
           titleTextStyle: TextStyle(
@@ -36,7 +37,6 @@ class ThemeController extends GetxController {
             fontWeight: FontWeight.bold,
             color: Theme.of(context).textTheme.bodyLarge!.color,
           ),
-          actionsIconTheme: const IconThemeData(size: 18),
         ),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.all(16),
@@ -62,24 +62,24 @@ class ThemeController extends GetxController {
             const FloatingActionButtonThemeData(shape: CircleBorder()),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(
+            shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            backgroundColor: MaterialStateProperty.resolveWith(
-              (states) => states.contains(MaterialState.focused) ||
-                      states.contains(MaterialState.hovered) ||
-                      states.contains(MaterialState.pressed) ||
-                      states.contains(MaterialState.selected)
+            backgroundColor: WidgetStateProperty.resolveWith(
+              (states) => states.contains(WidgetState.focused) ||
+                      states.contains(WidgetState.hovered) ||
+                      states.contains(WidgetState.pressed) ||
+                      states.contains(WidgetState.selected)
                   ? Colors.white
                   : const Color(0xFF540804),
             ),
-            foregroundColor: MaterialStateProperty.resolveWith(
-              (states) => states.contains(MaterialState.focused) ||
-                      states.contains(MaterialState.hovered) ||
-                      states.contains(MaterialState.pressed) ||
-                      states.contains(MaterialState.selected)
+            foregroundColor: WidgetStateProperty.resolveWith(
+              (states) => states.contains(WidgetState.focused) ||
+                      states.contains(WidgetState.hovered) ||
+                      states.contains(WidgetState.pressed) ||
+                      states.contains(WidgetState.selected)
                   ? const Color(0xFF540804)
                   : Colors.white,
             ),
@@ -87,26 +87,26 @@ class ThemeController extends GetxController {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(
+            shape: WidgetStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            side: MaterialStateProperty.resolveWith(
+            side: WidgetStateProperty.resolveWith(
               (states) => BorderSide(
-                color: states.contains(MaterialState.focused) ||
-                        states.contains(MaterialState.hovered) ||
-                        states.contains(MaterialState.pressed) ||
-                        states.contains(MaterialState.selected)
+                color: states.contains(WidgetState.focused) ||
+                        states.contains(WidgetState.hovered) ||
+                        states.contains(WidgetState.pressed) ||
+                        states.contains(WidgetState.selected)
                     ? Colors.white
                     : const Color(0xFF540804),
               ),
             ),
-            foregroundColor: MaterialStateProperty.resolveWith(
-              (states) => states.contains(MaterialState.focused) ||
-                      states.contains(MaterialState.hovered) ||
-                      states.contains(MaterialState.pressed) ||
-                      states.contains(MaterialState.selected)
+            foregroundColor: WidgetStateProperty.resolveWith(
+              (states) => states.contains(WidgetState.focused) ||
+                      states.contains(WidgetState.hovered) ||
+                      states.contains(WidgetState.pressed) ||
+                      states.contains(WidgetState.selected)
                   ? Colors.white
                   : const Color(0xFF540804),
             ),
