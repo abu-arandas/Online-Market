@@ -2,7 +2,12 @@ import '/exports.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Initialize GetStorage
+  await GetStorage.init();
 
   runApp(const MyApp());
 }
@@ -11,21 +16,20 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => FlutterBootstrap5(
-        builder: (context) => GetMaterialApp(
-            title: 'Online Market',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeController().themeData(context, Brightness.light),
-            darkTheme: ThemeController().themeData(context, Brightness.dark),
-            themeMode: ThemeController().isDark ? ThemeMode.dark : ThemeMode.light,
-            initialBinding: BindingsBuilder(() {
-              Get.put<LanguageController>(LanguageController());
-              Get.put<ThemeController>(ThemeController());
-              Get.put<HomeController>(HomeController());
-              Get.put<AddressController>(AddressController());
-              Get.put<CartController>(CartController());
-            }),
-            home: const SplashScreen(),
-          ),
-  );
+  Widget build(BuildContext context) {
+    return FlutterBootstrap5(
+      builder: (context) => GetMaterialApp(
+        title: Config.appName,
+        debugShowCheckedModeBanner: false,
+        theme: AppThemes.lightTheme,
+        darkTheme: AppThemes.darkTheme,
+        themeMode: ThemeMode.system,
+        initialBinding: InitialBinding(),
+        initialRoute: AppPages.initial,
+        getPages: AppPages.routes,
+        defaultTransition: Transition.cupertino,
+        transitionDuration: AppConstants.animationNormal,
+      ),
+    );
+  }
 }

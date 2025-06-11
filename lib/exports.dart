@@ -1,74 +1,81 @@
-// ignore_for_file: depend_on_referenced_packages
-
-export 'dart:ui'
-    hide
-        Gradient,
-        decodeImageFromList,
-        ImageDecoderCallback,
-        StrutStyle,
-        TextStyle,
-        Image;
-
+// Core Flutter & Material
 export 'package:flutter/material.dart';
+export 'package:flutter/services.dart';
 
-export 'firebase_options.dart';
+// Firebase
 export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_auth/firebase_auth.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:firebase_storage/firebase_storage.dart';
 
-export 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
+// State Management & Navigation
 export 'package:get/get.dart';
+
+// UI Components
+export 'package:flutter_bootstrap5/flutter_bootstrap5.dart';
+export 'package:carousel_slider/carousel_slider.dart';
+
+// Utilities
 export 'package:geolocator/geolocator.dart';
 export 'package:phone_form_field/phone_form_field.dart';
-export 'package:carousel_slider/carousel_slider.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:flutter_map/flutter_map.dart';
-export 'package:latlong2/latlong.dart' hide Path;
 export 'package:barcode_widget/barcode_widget.dart';
 export 'package:image_picker/image_picker.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
+export 'package:get_storage/get_storage.dart';
 
-export 'controller/language.dart';
-export 'controller/theme.dart';
-export 'controller/firestore.dart';
-export 'controller/home.dart';
-export 'controller/address.dart';
-export 'controller/cart.dart';
-export 'controller/order.dart';
+// Project files
+export 'firebase_options.dart';
 
-export 'model/text.dart';
-export 'model/user.dart';
-export 'model/product.dart';
-export 'model/offer.dart';
-export 'model/category.dart';
-export 'model/order.dart';
+// Core
+export 'core/config.dart';
+export 'core/utils/constants.dart';
+export 'core/utils/themes.dart';
+export 'core/utils/helpers.dart';
+export 'core/services/firebase_service.dart';
+export 'core/services/mapping_service.dart';
+export 'core/services/scanning_service.dart';
+export 'core/bindings/initial_binding.dart';
 
-export 'view/splash.dart';
-export 'view/main.dart';
+// Data
+export 'data/models/user_model.dart';
+export 'data/models/product_model.dart';
+export 'data/models/cart_model.dart';
+export 'data/models/order_model.dart';
+export 'data/repositories/auth_repository.dart';
+export 'data/repositories/product_repository.dart';
+export 'data/repositories/cart_repository.dart';
+export 'data/repositories/order_repository.dart';
 
-export 'view/page/authentication/login.dart';
-export 'view/page/authentication/register.dart';
-export 'view/page/authentication/reset.dart';
+// Routes
+export 'routes/app_routes.dart';
+export 'routes/app_pages.dart';
 
-export 'view/page/home/home.dart';
-export 'view/page/home/cart.dart';
-export 'view/page/home/orders.dart';
-export 'view/page/home/favorite.dart';
-export 'view/page/home/product.dart';
-export 'view/page/home/order.dart';
-export 'view/page/home/shop.dart';
-export 'view/page/home/offer.dart';
+// Modules
+export 'modules/auth/controllers/auth_controller.dart';
+export 'modules/auth/views/login_view.dart';
+export 'modules/auth/views/signup_view.dart';
+export 'modules/auth/views/forgot_password_view.dart';
 
-export 'view/widget/authentication_form.dart';
-export 'view/widget/product.dart';
-export 'view/widget/order.dart';
+export 'modules/home/controllers/home_controller.dart';
+export 'modules/home/views/home_view.dart';
 
+export 'modules/cart/controllers/cart_controller.dart';
+export 'modules/cart/views/cart_view.dart';
+export 'modules/cart/views/checkout_view.dart';
 
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, dynamic> reverseMap;
+export 'modules/profile/controllers/profile_controller.dart';
+export 'modules/profile/views/profile_view.dart';
 
-  EnumValues(this.map);
+// Note: MapController from local module is available but not exported to avoid conflicts
+export 'modules/map/views/map_view.dart';
 
-  Map<T, dynamic> get reverse => map.map((k, v) => MapEntry(v, k));
-}
+export 'modules/order/controllers/order_history_controller.dart';
+export 'modules/order/views/order_history_view.dart';
+
+// Widgets
+export 'widgets/common/custom_button.dart';
+export 'widgets/common/custom_card.dart';
+export 'widgets/common/custom_input.dart';
+export 'widgets/layout/responsive_wrapper.dart';
