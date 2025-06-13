@@ -85,7 +85,6 @@ class BiometricService extends GetxService {
       final result = await authenticateWithBiometrics();
       if (result) {
         // Save biometric preference
-        await GetStorage().write('biometric_enabled', true);
         Get.snackbar(
           'Success',
           'Biometric login has been enabled',
@@ -109,15 +108,10 @@ class BiometricService extends GetxService {
   }
 
   Future<void> disableBiometricLogin() async {
-    await GetStorage().write('biometric_enabled', false);
     Get.snackbar(
       'Disabled',
       'Biometric login has been disabled',
       snackPosition: SnackPosition.BOTTOM,
     );
-  }
-
-  bool isBiometricEnabled() {
-    return GetStorage().read('biometric_enabled') ?? false;
   }
 }

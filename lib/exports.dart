@@ -33,8 +33,6 @@ export 'package:flutter_map/flutter_map.dart';
 export 'package:barcode_widget/barcode_widget.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:connectivity_plus/connectivity_plus.dart';
-export 'package:get_storage/get_storage.dart';
-export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 export 'package:flutter_dotenv/flutter_dotenv.dart';
 export 'package:share_plus/share_plus.dart';

@@ -2,34 +2,17 @@ import '/exports.dart';
 
 class CartRepository {
   final FirebaseService _firebaseService = Get.find<FirebaseService>();
-  final GetStorage _storage = Get.find<GetStorage>();
 
   // Get user's cart
-  Future<CartModel?> getUserCart(String userId) async {
-    try {
-      final doc = await _firebaseService.getDocument('carts', userId);
-
-      if (doc.exists) {
-        return CartModel.fromMap(doc.data() as Map<String, dynamic>);
-      }
-
-      // Try to get from local storage
-      return _getCartFromStorage();
-    } catch (e) {
-      // Fallback to local storage
-      return _getCartFromStorage();
-    }
-  }
+  Future<CartModel?> getUserCart(String userId) async {}
 
   // Save cart
   Future<CartModel> saveCart(CartModel cart) async {
     try {
       await _firebaseService.createDocument('carts', cart.userId, cart.toMap());
-      await _saveCartToStorage(cart);
       return cart;
     } catch (e) {
       // Save to local storage if Firebase fails
-      await _saveCartToStorage(cart);
       return cart;
     }
   }
@@ -39,11 +22,9 @@ class CartRepository {
     try {
       final updatedCart = cart.copyWith(updatedAt: DateTime.now());
       await _firebaseService.updateDocument('carts', cart.userId, updatedCart.toMap());
-      await _saveCartToStorage(updatedCart);
       return updatedCart;
     } catch (e) {
       // Save to local storage if Firebase fails
-      await _saveCartToStorage(cart);
       return cart;
     }
   }
@@ -146,61 +127,8 @@ class CartRepository {
     }
   }
 
-  // Clear cart
-  Future<void> clearCart(String userId) async {
-    try {
-      await _firebaseService.deleteDocument('carts', userId);
-      await _clearCartFromStorage();
-    } catch (e) {
-      await _clearCartFromStorage();
-    }
-  }
-
-  // Listen to cart changes
-  Stream<CartModel?> listenToCart(String userId) {
-    try {
-      return _firebaseService.listenToDocument('carts', userId).map((snapshot) {
-        if (snapshot.exists) {
-          final cart = CartModel.fromMap(snapshot.data() as Map<String, dynamic>);
-          _saveCartToStorage(cart);
-          return cart;
-        }
-        return null;
-      });
-    } catch (e) {
-      // Return stream with local cart
-      return Stream.value(_getCartFromStorage());
-    }
-  }
-
   // Sync local cart with server
-  Future<void> syncCart(String userId) async {
-    try {
-      final localCart = _getCartFromStorage();
-      if (localCart != null && localCart.userId == userId) {
-        await saveCart(localCart);
-      }
-    } catch (e) {
-      // Ignore sync errors
-    }
-  }
-
-  // Private methods for local storage
-  Future<void> _saveCartToStorage(CartModel cart) async {
-    await _storage.write(Config.cartDataKey, cart.toMap());
-  }
-
-  Future<void> _clearCartFromStorage() async {
-    await _storage.remove(Config.cartDataKey);
-  }
-
-  CartModel? _getCartFromStorage() {
-    final cartData = _storage.read(Config.cartDataKey);
-    if (cartData != null) {
-      return CartModel.fromMap(Map<String, dynamic>.from(cartData));
-    }
-    return null;
-  }
+  Future<void> syncCart(String userId) async {}
 
   // Calculate delivery fee based on cart and location
   Future<double> calculateDeliveryFee(CartModel cart, double userLatitude, double userLongitude) async {

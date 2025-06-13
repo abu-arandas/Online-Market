@@ -23,13 +23,11 @@ dependencies:
   barcode_widget: ^2.0.4    
   image_picker: ^1.0.2
   connectivity_plus: ^6.1.0
-  get_storage: ^2.1.1
   
   # New enhancements
   firebase_messaging: ^15.0.1
   firebase_analytics: ^11.0.1
   firebase_crashlytics: ^4.0.1
-  shared_preferences: ^2.2.2
   speech_to_text: ^7.0.0
   flutter_local_notifications: ^19.2.1
   flutter_dotenv: ^5.1.0

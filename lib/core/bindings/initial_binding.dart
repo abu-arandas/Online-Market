@@ -8,14 +8,12 @@ class InitialBinding extends Bindings {
     Get.put(MappingService(), permanent: true);
     Get.put(ScanningService(), permanent: true);
     Get.put(NotificationService(), permanent: true);
-    Get.put(CacheService(), permanent: true);
     Get.put(SearchService(), permanent: true);
     Get.put(BiometricService(), permanent: true);
     Get.put(PaymentService(), permanent: true);
     Get.put(OrderTrackingService(), permanent: true);
     Get.put(VoiceSearchService(), permanent: true);
     Get.put(ARService(), permanent: true);
-    Get.put(ABTestingService(), permanent: true);
 
     // Repositories
     Get.put(AuthRepository(), permanent: true);
@@ -26,9 +24,6 @@ class InitialBinding extends Bindings {
     Get.put(ReviewRepository(), permanent: true);
     Get.put(NotificationRepository(), permanent: true);
 
-    // Initialize GetStorage
-    Get.putAsync(() => GetStorage.init().then((_) => GetStorage()), permanent: true);
-
     // Controllers
     Get.lazyPut(() => AuthController());
     Get.lazyPut(() => HomeController());
@@ -37,7 +32,6 @@ class InitialBinding extends Bindings {
     Get.lazyPut(() => SearchController());
     Get.lazyPut(() => WishlistController());
     Get.lazyPut(() => NotificationController());
-    Get.lazyPut(() => ThemeController());
     Get.lazyPut(() => SettingsController());
     Get.lazyPut(() => MainNavigationController());
   }

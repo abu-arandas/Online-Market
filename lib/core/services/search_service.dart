@@ -2,7 +2,6 @@ import '/exports.dart';
 
 class SearchService extends GetxService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final CacheService _cacheService = Get.find<CacheService>();
 
   static SearchService get to => Get.find();
 
@@ -16,11 +15,6 @@ class SearchService extends GetxService {
     String sortBy = 'relevance', // relevance, price_low, price_high, rating, newest
   }) async {
     try {
-      // Save search query to history
-      if (query.isNotEmpty) {
-        await _cacheService.addSearchQuery(query);
-      }
-
       Query queryRef = _firestore.collection('products');
 
       // Apply filters
@@ -89,39 +83,6 @@ class SearchService extends GetxService {
 
       return searchTerms.any((term) => searchableText.contains(term));
     }).toList();
-  }
-
-  Future<List<String>> getSearchSuggestions(String query) async {
-    if (query.isEmpty) return [];
-
-    try {
-      // Get suggestions from cached search history
-      final history = _cacheService.getSearchHistory();
-      final suggestions = history.where((item) => item.toLowerCase().contains(query.toLowerCase())).take(5).toList();
-
-      // Add product name suggestions
-      final productSuggestions = await _getProductNameSuggestions(query);
-      suggestions.addAll(productSuggestions);
-
-      return suggestions.toSet().toList(); // Remove duplicates
-    } catch (e) {
-      return [];
-    }
-  }
-
-  Future<List<String>> _getProductNameSuggestions(String query) async {
-    try {
-      final querySnapshot = await _firestore
-          .collection('products')
-          .where('name', isGreaterThanOrEqualTo: query)
-          .where('name', isLessThan: '${query}z')
-          .limit(5)
-          .get();
-
-      return querySnapshot.docs.map((doc) => doc.data()['name'] as String).toList();
-    } catch (e) {
-      return [];
-    }
   }
 
   Future<List<String>> getPopularSearchTerms() async {
@@ -196,13 +157,5 @@ class SearchService extends GetxService {
     } catch (e) {
       return {};
     }
-  }
-
-  List<String> getSearchHistory() {
-    return _cacheService.getSearchHistory();
-  }
-
-  Future<void> clearSearchHistory() async {
-    await _cacheService.clearSearchHistory();
   }
 }

@@ -6,9 +6,6 @@ Future<void> main() async {
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // Initialize GetStorage
-  await GetStorage.init();
-
   runApp(const MyApp());
 }
 
@@ -25,22 +22,11 @@ class MyApp extends StatelessWidget {
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeMode.system,
         initialBinding: InitialBinding(),
-        initialRoute: _getInitialRoute(),
+        initialRoute: AppRoutes.home,
         getPages: AppPages.routes,
         defaultTransition: Transition.cupertino,
         transitionDuration: AppConstants.animationNormal,
       ),
     );
-  }
-
-  String _getInitialRoute() {
-    final box = GetStorage();
-    final hasCompletedOnboarding = box.read('onboarding_completed') ?? false;
-
-    if (!hasCompletedOnboarding) {
-      return AppRoutes.onboarding;
-    }
-
-    return AppRoutes.home;
   }
 }

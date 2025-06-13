@@ -83,7 +83,6 @@ class AppPages {
       page: () => const SettingsView(),
       binding: BindingsBuilder(() {
         Get.lazyPut(() => SettingsController());
-        Get.lazyPut(() => ThemeController());
       }),
     ),
     GetPage(

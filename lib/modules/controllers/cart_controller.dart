@@ -141,7 +141,6 @@ class CartController extends GetxController {
       final userId = authController.currentUser.value?.id;
 
       if (userId != null) {
-        await _cartRepository.clearCart(userId);
         cart.value = null;
         deliveryFee.value = 0.0;
         discount.value = 0.0;

@@ -34,7 +34,6 @@ class SearchController extends GetxController {
   void onInit() {
     super.onInit();
     _loadInitialData();
-    _loadSearchHistory();
   }
 
   @override
@@ -61,10 +60,6 @@ class SearchController extends GetxController {
     }
   }
 
-  void _loadSearchHistory() {
-    searchHistory.value = _searchService.getSearchHistory();
-  }
-
   Future<void> search(String query) async {
     if (query.trim().isEmpty) {
       searchResults.clear();
@@ -86,7 +81,6 @@ class SearchController extends GetxController {
       );
 
       searchResults.value = results;
-      _loadSearchHistory(); // Refresh history after search
     } catch (e) {
       Get.snackbar(
         'Search Error',
@@ -97,20 +91,6 @@ class SearchController extends GetxController {
       );
     } finally {
       isLoading.value = false;
-    }
-  }
-
-  Future<void> getSuggestions(String query) async {
-    if (query.trim().isEmpty) {
-      suggestions.clear();
-      return;
-    }
-
-    try {
-      final result = await _searchService.getSearchSuggestions(query);
-      suggestions.value = result;
-    } catch (e) {
-      print('Error getting suggestions: $e');
     }
   }
 
@@ -130,11 +110,6 @@ class SearchController extends GetxController {
     searchTextController.clear();
     searchResults.clear();
     suggestions.clear();
-  }
-
-  Future<void> clearSearchHistory() async {
-    await _searchService.clearSearchHistory();
-    _loadSearchHistory();
   }
 
   void setCategory(String? category) {

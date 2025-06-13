@@ -95,10 +95,6 @@ class OnboardingController extends GetxController {
   // Complete onboarding
   Future<void> completeOnboarding() async {
     try {
-      // Mark onboarding as completed
-      final box = GetStorage();
-      await box.write('onboarding_completed', true);
-
       // Request necessary permissions
       await _requestPermissions();
 

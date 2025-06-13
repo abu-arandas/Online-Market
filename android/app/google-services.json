@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "244538908147",
+    "project_id": "alkhatib-market",
+    "storage_bucket": "alkhatib-market.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244538908147:android:fce79def7c4960c72e8686",
+        "android_client_info": {
+          "package_name": "com.example.online_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244538908147-qupkkv0j7mju9gg6spcc52jrjga700r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqpZnvOqSQ322eVhPN7cVi01LVU-FDuBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244538908147-etqj594d3dnq3jstmi0h5tf4dc7ugqvj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "244538908147-4bfern4fhn8195tm53bl4vdrfqoc8gcu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arandas.onlinemarket.admin.admin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

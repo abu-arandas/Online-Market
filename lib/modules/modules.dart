@@ -9,7 +9,6 @@ export 'controllers/profile_controller.dart';
 export 'controllers/search_controller.dart';
 export 'controllers/wishlist_controller.dart';
 export 'controllers/notification_controller.dart';
-export 'controllers/theme_controller.dart';
 export 'controllers/settings_controller.dart';
 export 'controllers/main_navigation_controller.dart';
 export 'controllers/product_detail_controller.dart';

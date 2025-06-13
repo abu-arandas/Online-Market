@@ -203,7 +203,7 @@ class AppThemes {
         vertical: AppConstants.spacing12,
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: AppConstants.surfaceColor,
       elevation: 2,
       shape: RoundedRectangleBorder(
@@ -282,7 +282,7 @@ class AppThemes {
         vertical: AppConstants.spacing12,
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: const Color(0xFF1E1E1E),
       elevation: 2,
       shape: RoundedRectangleBorder(

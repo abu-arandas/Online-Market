@@ -104,26 +104,6 @@ class SettingsView extends GetView<SettingsController> {
       title: 'App Preferences',
       icon: Icons.tune,
       children: [
-        ListTile(
-          leading: const Icon(Icons.palette),
-          title: const Text('Theme'),
-          subtitle: const Text('Choose your preferred theme'),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          onTap: () {
-            final ThemeController themeController = Get.find<ThemeController>();
-            themeController.showThemeSelector();
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.color_lens),
-          title: const Text('App Color'),
-          subtitle: const Text('Customize app colors'),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          onTap: () {
-            final ThemeController themeController = Get.find<ThemeController>();
-            themeController.showColorPicker();
-          },
-        ),
         Obx(() => ListTile(
               leading: const Icon(Icons.language),
               title: const Text('Language'),
@@ -165,20 +145,6 @@ class SettingsView extends GetView<SettingsController> {
               value: controller.dataSync.value,
               onChanged: controller.toggleDataSync,
             )),
-        ListTile(
-          leading: const Icon(Icons.clear_all),
-          title: const Text('Clear Cache'),
-          subtitle: const Text('Free up storage space'),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          onTap: () => _showClearCacheDialog(),
-        ),
-        ListTile(
-          leading: const Icon(Icons.download),
-          title: const Text('Export Data'),
-          subtitle: const Text('Download your data'),
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-          onTap: () => _showExportDataDialog(),
-        ),
       ],
     );
   }
@@ -286,56 +252,6 @@ class SettingsView extends GetView<SettingsController> {
             ),
           ),
           ...children,
-        ],
-      ),
-    );
-  }
-
-  void _showClearCacheDialog() {
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Clear Cache'),
-        content: const Text(
-          'This will clear all cached data including images and temporary files. '
-          'The app may take longer to load content after clearing cache.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.back();
-              controller.clearCache();
-            },
-            child: const Text('Clear'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showExportDataDialog() {
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Export Data'),
-        content: const Text(
-          'This will create a backup of your account data including orders, '
-          'wishlist, and preferences. The export will be sent to your email.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Get.back();
-              controller.exportData();
-            },
-            child: const Text('Export'),
-          ),
         ],
       ),
     );

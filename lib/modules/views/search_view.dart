@@ -51,9 +51,7 @@ class SearchView extends GetView<SearchController> {
             child: TextField(
               controller: controller.searchTextController,
               onChanged: (value) {
-                if (value.isNotEmpty) {
-                  controller.getSuggestions(value);
-                } else {
+                if (!value.isNotEmpty) {
                   controller.clearSearch();
                 }
               },
@@ -167,13 +165,11 @@ class SearchView extends GetView<SearchController> {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        ...controller.suggestions
-            .map((suggestion) => ListTile(
-                  leading: const Icon(Icons.search, color: Colors.grey),
-                  title: Text(suggestion),
-                  onTap: () => controller.selectSuggestion(suggestion),
-                ))
-            ,
+        ...controller.suggestions.map((suggestion) => ListTile(
+              leading: const Icon(Icons.search, color: Colors.grey),
+              title: Text(suggestion),
+              onTap: () => controller.selectSuggestion(suggestion),
+            )),
         const SizedBox(height: 24),
       ],
     );
@@ -186,32 +182,15 @@ class SearchView extends GetView<SearchController> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Recent Searches',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              TextButton(
-                onPressed: controller.clearSearchHistory,
-                child: const Text('Clear'),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          ...controller.searchHistory
-              .take(5)
-              .map((query) => ListTile(
-                    leading: const Icon(Icons.history, color: Colors.grey),
-                    title: Text(query),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.call_made, size: 16),
-                      onPressed: () => controller.searchFromHistory(query),
-                    ),
-                    onTap: () => controller.searchFromHistory(query),
-                  ))
-              ,
+          ...controller.searchHistory.take(5).map((query) => ListTile(
+                leading: const Icon(Icons.history, color: Colors.grey),
+                title: Text(query),
+                trailing: IconButton(
+                  icon: const Icon(Icons.call_made, size: 16),
+                  onPressed: () => controller.searchFromHistory(query),
+                ),
+                onTap: () => controller.searchFromHistory(query),
+              )),
           const SizedBox(height: 24),
         ],
       );
