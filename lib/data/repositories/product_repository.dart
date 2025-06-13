@@ -89,6 +89,11 @@ class ProductRepository {
     }
   }
 
+  // Alias for backwards compatibility
+  Future<ProductModel?> getProduct(String productId) async {
+    return getProductById(productId);
+  }
+
   // Get product by barcode
   Future<ProductModel?> getProductByBarcode(String barcode) async {
     try {

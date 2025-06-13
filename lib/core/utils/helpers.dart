@@ -1,5 +1,6 @@
 import '/exports.dart';
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 
 class AppHelpers {
   // Format currency
@@ -202,5 +203,27 @@ class AppHelpers {
   // Apply discount
   static double applyDiscount(double amount, double discountPercent) {
     return amount - (amount * discountPercent / 100);
+  }
+
+  // Log error
+  static void logError(String message, [Object? error, StackTrace? stackTrace]) {
+    if (kDebugMode) {
+      print('ERROR: $message');
+      if (error != null) {
+        print('Error details: $error');
+      }
+      if (stackTrace != null) {
+        print('Stack trace: $stackTrace');
+      }
+    }
+    // In production, you might want to send to crash reporting service
+    // FirebaseCrashlytics.instance.recordError(error, stackTrace, reason: message);
+  }
+
+  // Log info
+  static void logInfo(String message) {
+    if (kDebugMode) {
+      print('INFO: $message');
+    }
   }
 }

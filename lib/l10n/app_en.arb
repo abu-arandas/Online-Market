@@ -1,0 +1,90 @@
+{
+  "appTitle": "Online Market",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search label"
+  },
+  "cart": "Cart",
+  "@cart": {
+    "description": "Cart label"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile label"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home label"
+  },
+  "wishlist": "Wishlist",
+  "@wishlist": {
+    "description": "Wishlist label"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications label"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings label"
+  },
+  "addToCart": "Add to Cart",
+  "@addToCart": {
+    "description": "Add to cart button text"
+  },
+  "buyNow": "Buy Now",
+  "@buyNow": {
+    "description": "Buy now button text"
+  },
+  "productDetails": "Product Details",
+  "@productDetails": {
+    "description": "Product details title"
+  },
+  "reviews": "Reviews",
+  "@reviews": {
+    "description": "Reviews section title"
+  },
+  "writeReview": "Write Review",
+  "@writeReview": {
+    "description": "Write review button text"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Price label"
+  },
+  "quantity": "Quantity",
+  "@quantity": {
+    "description": "Quantity label"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total label"
+  },
+  "checkout": "Checkout",
+  "@checkout": {
+    "description": "Checkout button text"
+  },
+  "orderHistory": "Order History",
+  "@orderHistory": {
+    "description": "Order history title"
+  },
+  "trackOrder": "Track Order",
+  "@trackOrder": {
+    "description": "Track order button text"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register button text"
+  }
+}

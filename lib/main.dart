@@ -25,11 +25,22 @@ class MyApp extends StatelessWidget {
         darkTheme: AppThemes.darkTheme,
         themeMode: ThemeMode.system,
         initialBinding: InitialBinding(),
-        initialRoute: AppPages.initial,
+        initialRoute: _getInitialRoute(),
         getPages: AppPages.routes,
         defaultTransition: Transition.cupertino,
         transitionDuration: AppConstants.animationNormal,
       ),
     );
+  }
+
+  String _getInitialRoute() {
+    final box = GetStorage();
+    final hasCompletedOnboarding = box.read('onboarding_completed') ?? false;
+
+    if (!hasCompletedOnboarding) {
+      return AppRoutes.onboarding;
+    }
+
+    return AppRoutes.home;
   }
 }

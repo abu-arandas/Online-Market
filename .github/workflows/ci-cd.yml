@@ -1,0 +1,74 @@
+name: Online Market CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.0'
+        channel: 'stable'
+    
+    - name: Get dependencies
+      run: flutter pub get
+    
+    - name: Verify formatting
+      run: dart format --output=none --set-exit-if-changed .
+    
+    - name: Analyze project source
+      run: flutter analyze
+    
+    - name: Run tests
+      run: flutter test
+    
+    - name: Build APK
+      run: flutter build apk --release
+    
+    - name: Build iOS (if macOS)
+      if: runner.os == 'macOS'
+      run: flutter build ios --release --no-codesign
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release.apk
+        path: build/app/outputs/flutter-apk/app-release.apk
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.0'
+        channel: 'stable'
+    
+    - name: Get dependencies
+      run: flutter pub get
+    
+    - name: Build APK
+      run: flutter build apk --release
+    
+    - name: Deploy to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{ secrets.FIREBASE_APP_ID }}
+        token: ${{ secrets.FIREBASE_TOKEN }}
+        groups: testers
+        file: build/app/outputs/flutter-apk/app-release.apk
+        releaseNotes: "Automated build from GitHub Actions"
